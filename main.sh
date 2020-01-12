@@ -16,4 +16,7 @@ if ! dpkg -s nginx; then
 fi
 
 read -p 'Enter a domain name: ' domain
-echo 'entered Domain: '$domain 
+
+if ! grep -q $domain /etc/hosts; then
+    sudo /bin/bash -c "echo -e '127.0.0.1 $domain'>>/etc/hosts"
+fi
